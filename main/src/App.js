@@ -1,23 +1,46 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import { useState,useEffect } from 'react';
+import Posts from './components/posts'
 
-function App() {
+
+
+
+
+
+function App(){
+  const [username,setUsername] = useState('') 
+  const [password,setPassword] = useState('') 
+  const axios = require('axios').default;
+  
+let postdata = (e) => {
+    e.preventDefault();
+
+
+
+  let res = axios.put('http://localhost:5000/users/add', { "username": username, "password": password});
+
+
+};
+
+let updateU = (e) => {
+  setUsername(e.target.value)
+}
+let updateP = (e) => {
+  setPassword(e.target.value)
+}
+ 
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+        <input type="text" onChange={updateU} /><br />
+        <input type="text" onChange={updateP} name="pass" id="pass" /><br />
+        <button onSubmit={postdata}>Submit</button>
+      </form>
+      <Posts />
     </div>
   );
 }
