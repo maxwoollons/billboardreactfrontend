@@ -3,6 +3,17 @@ import './App.css';
 import axios from 'axios';
 import { useState,useEffect } from 'react';
 import Posts from './components/posts'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Routes,
+} from "react-router-dom";
+import Home from './components/home'
+import Errorpage from "./components/errorpage.js"
+import Login from "./components/login.js"
+
 
 
 
@@ -10,39 +21,20 @@ import Posts from './components/posts'
 
 
 function App(){
-  const [username,setUsername] = useState('') 
-  const [password,setPassword] = useState('') 
-  const axios = require('axios').default;
-  
-let postdata = (e) => {
-    e.preventDefault();
-
-
-
-  let res = axios.put('http://localhost:5000/users/add', { "username": username, "password": password});
-
-
-};
-
-let updateU = (e) => {
-  setUsername(e.target.value)
-}
-let updateP = (e) => {
-  setPassword(e.target.value)
-}
- 
-
-
   return (
-    <div className="App">
-      <form>
-        <input type="text" onChange={updateU} /><br />
-        <input type="text" onChange={updateP} name="pass" id="pass" /><br />
-        <button onSubmit={postdata}>Submit</button>
-      </form>
-      <Posts />
-    </div>
-  );
+    <>
+    <Router>
+      <li><a href="/">Home</a></li>
+      <li><a href="/login">Login</a></li>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="*" element={<Errorpage/>}/>
+      </Routes>
+  </Router> 
+  </>
+  )
+  
 }
 
 export default App;

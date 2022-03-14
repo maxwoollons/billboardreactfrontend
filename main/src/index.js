@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {browserRouter as Router, Route, Switch} from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>,
+  // This is fucky
   document.getElementById('root')
 );
 
