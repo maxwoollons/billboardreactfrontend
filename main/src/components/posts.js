@@ -5,6 +5,7 @@ import axios from 'axios'
 
 function Posts() { 
     const [responsedata, setResponse] = useState([])
+    const [userData, setUser] = useState([])
     
     useEffect(() =>{
         
@@ -14,8 +15,7 @@ function Posts() {
         // handle success
             setResponse(response.data);
             console.log(responsedata)
-            
-            
+             
             
         })
         .catch(function (error) {
@@ -36,7 +36,9 @@ function Posts() {
        {responsedata.map((data, index)=>{
                 return (
                 
-                <div className="box"  key={data.postid} ><h1>{data.user_id} {data.content}</h1></div>
+                <div className="box"  key={data.postid} ><h1>{data.user_id} {data.content}</h1>
+                <div>By {data.user_id.username}</div>
+                </div>
                 )
                 
               })} 

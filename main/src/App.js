@@ -13,6 +13,7 @@ import {
 import Home from './components/home'
 import Errorpage from "./components/errorpage.js"
 import Login from "./components/login.js"
+import Register from './components/register';
 
 
 
@@ -24,11 +25,16 @@ function App(){
   return (
     <>
     <Router>
+      <nav>
       <li><a href="/">Home</a></li>
       <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+      </nav>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+
         <Route path="*" element={<Errorpage/>}/>
       </Routes>
   </Router> 

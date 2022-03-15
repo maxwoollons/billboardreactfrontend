@@ -1,21 +1,38 @@
 import React from 'react'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import "../App.css";
+import bcrypt from 'bcryptjs' //
 
 
-const Login = () => {
-  const [username,setUsername] = useState('') 
+
+
+
+
+function Register() {
+const [username,setUsername] = useState('') 
   const [password,setPassword] = useState('') 
   const axios = require('axios').default;
   
 const Postdata = (e) => {
+    let inputbox = document.getElementById("pass")
+    const bcrypt = require('bcryptjs');//
+    const saltRounds = 10; //
     e.preventDefault();
-    // const axios = require('axios').default;
+    const axios = require('axios').default;
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(inputbox.value, salt, function(err, hash) {
+            setPassword(hash)
+            console.log(hash)
+            let res = axios.put('http://localhost:5000/users/add', { "username": username, "password": hash});
+        });
+    });
+    
+    
 
 
 
-    // let res = axios.put('http://localhost:5000/users/add', { "username": username, "password": password});
-
+   
 
     console.log("works")
 };
@@ -28,23 +45,19 @@ let updateP = (e) => {
 }
  
 
-
-
-
   return (
     <div className='reg-background'>
     <div className='registerbox'>
-        <h3>Login to your Account</h3>
+        <h3>Register Your Account</h3>
          <form className='reg' onSubmit={Postdata}>
           <input className='in' type="text" onChange={updateU} name="username" id="password" placeholder='username'/><br />
           <input className='in' type="text" onChange={updateP} name="password" id="pass" placeholder='password' /><br />
           <button className='btn-reg' type='submit'>Submit</button>
         </form> 
-     
+       
     </div>
     </div>
-    
   )
 }
 
-export default Login
+export default Register
